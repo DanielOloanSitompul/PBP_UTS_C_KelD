@@ -32,12 +32,11 @@ import com.google.firebase.database.ValueEventListener;
 
 public class Profile extends AppCompatActivity {
 
-    private ImageView setting,camera;
+    private ImageView edit,camera;
     private TextView logout;
     private FirebaseUser user;
     private DatabaseReference reference;
     private String userID;
-    private int STORAGE_PERMISSION_CODE = 1;
 
     @Override
     protected void onCreate(Bundle savedInstanceState) {
@@ -47,8 +46,7 @@ public class Profile extends AppCompatActivity {
         bottomNav.setSelectedItemId(R.id.navigation_profile);
         bottomNav.setOnNavigationItemSelectedListener(navListener);
         logout = findViewById(R.id.exitTV);
-        setting = findViewById(R.id.settingIV);
-        camera = findViewById(R.id.cameraIV);
+        edit = findViewById(R.id.editProfile);
 
         user = FirebaseAuth.getInstance().getCurrentUser();
         reference = FirebaseDatabase.getInstance().getReference("Users");
@@ -87,24 +85,11 @@ public class Profile extends AppCompatActivity {
             }
         });
 
-        camera.setOnClickListener(new View.OnClickListener() {
-            @Override
-            public void onClick(View view) {
-                if (ContextCompat.checkSelfPermission(Profile.this, Manifest.permission.CAMERA) != PackageManager.PERMISSION_GRANTED){
-                    requestStoragePermission();
-                }
-                else{
-                    Intent intent = new Intent(MediaStore.ACTION_IMAGE_CAPTURE);
-                    startActivityForResult(intent,100);
-                }
-            }
-        });
-
-        setting.setOnClickListener(new View.OnClickListener() {
+        edit.setOnClickListener(new View.OnClickListener() {
             @Override
             public void onClick(View view) {
                 startActivity(new Intent(getApplicationContext()
-                        , MainActivity.class));
+                        , ProfileUpdate.class));
             }
         });
         logout.setOnClickListener(new View.OnClickListener() {
@@ -118,42 +103,6 @@ public class Profile extends AppCompatActivity {
             }
         });
     }
-
-    private void requestStoragePermission(){
-        if (ActivityCompat.shouldShowRequestPermissionRationale(this,Manifest.permission.CAMERA)){
-            new AlertDialog.Builder(this)
-                    .setTitle("Permission needed")
-                    .setMessage("test")
-                    .setPositiveButton("ok", new DialogInterface.OnClickListener() {
-                        @Override
-                        public void onClick(DialogInterface dialogInterface, int i) {
-                            ActivityCompat.requestPermissions(Profile.this ,new String[] {Manifest.permission.CAMERA}, STORAGE_PERMISSION_CODE);
-                        }
-                    })
-                    .setNegativeButton("cancel", new DialogInterface.OnClickListener() {
-                        @Override
-                        public void onClick(DialogInterface dialogInterface, int i) {
-                            dialogInterface.dismiss();
-                        }
-                    })
-                    .create().show();
-        } else{
-            ActivityCompat.requestPermissions(this,new String[] {Manifest.permission.CAMERA}, STORAGE_PERMISSION_CODE);
-        }
-    }
-
-    @Override
-    public void onRequestPermissionsResult(int requestCode, @NonNull String[] permissions, @NonNull int[] grantResults) {
-        if (requestCode == STORAGE_PERMISSION_CODE){
-            if (grantResults.length>0 && grantResults[0] == PackageManager.PERMISSION_GRANTED){
-                Intent intent = new Intent(MediaStore.ACTION_IMAGE_CAPTURE);
-                startActivityForResult(intent,100);
-            } else {
-                Toast.makeText(this, "Permission denied", Toast.LENGTH_SHORT).show();
-            }
-        }
-    }
-
 
     private BottomNavigationView.OnNavigationItemSelectedListener navListener =
             new BottomNavigationView.OnNavigationItemSelectedListener() {
