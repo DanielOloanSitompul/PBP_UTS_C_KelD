@@ -9,7 +9,7 @@ import android.view.animation.AnimationUtils;
 import android.widget.ImageView;
 import android.widget.TextView;
 import com.danieloloan.pbp_uts.R;
-import com.danieloloan.pbp_uts.login.Login;
+import com.danieloloan.pbp_uts.login.LoginActivity;
 
 public class SplashScreen extends AppCompatActivity {
     Animation top,bot;
@@ -33,7 +33,7 @@ public class SplashScreen extends AppCompatActivity {
         handler.postDelayed(new Runnable() {
             @Override
             public void run() {
-                Intent intent = new Intent(SplashScreen.this, Login.class);
+                Intent intent = new Intent(SplashScreen.this, LoginActivity.class);
                 startActivity(intent);
                 finish();
             }

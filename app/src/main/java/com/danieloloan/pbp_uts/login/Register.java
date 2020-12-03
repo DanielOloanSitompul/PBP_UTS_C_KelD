@@ -23,7 +23,7 @@ public class Register extends AppCompatActivity  {
     private FirebaseAuth mAuth;
     private TextInputLayout Fullname,Phone,Address,Birthday,Email,Password;
     private Button Register;
-
+    private String hashPw;
     FirebaseDatabase rootNode;
     DatabaseReference reference;
 
@@ -118,7 +118,7 @@ public class Register extends AppCompatActivity  {
                                     if (task.isSuccessful()){
                                         FirebaseAuth.getInstance().signOut();
                                         Toast.makeText(Register.this, "User has been registered", Toast.LENGTH_SHORT).show();
-                                        Intent intent = new Intent(Register.this, Login.class);
+                                        Intent intent = new Intent(Register.this, LoginActivity.class);
                                         startActivity(intent);
                                     }else{
                                         Toast.makeText(Register.this, "Failed to register! Try again", Toast.LENGTH_SHORT).show();

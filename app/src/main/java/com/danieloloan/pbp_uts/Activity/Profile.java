@@ -1,17 +1,10 @@
 package com.danieloloan.pbp_uts.Activity;
 
 import androidx.annotation.NonNull;
-import androidx.appcompat.app.AlertDialog;
 import androidx.appcompat.app.AppCompatActivity;
-import androidx.core.app.ActivityCompat;
-import androidx.core.content.ContextCompat;
 
-import android.Manifest;
-import android.content.DialogInterface;
 import android.content.Intent;
-import android.content.pm.PackageManager;
 import android.os.Bundle;
-import android.provider.MediaStore;
 import android.view.MenuItem;
 import android.view.View;
 import android.widget.ImageView;
@@ -20,7 +13,7 @@ import android.widget.Toast;
 
 import com.danieloloan.pbp_uts.User;
 import com.danieloloan.pbp_uts.R;
-import com.danieloloan.pbp_uts.login.Login;
+import com.danieloloan.pbp_uts.login.LoginActivity;
 import com.google.android.material.bottomnavigation.BottomNavigationView;
 import com.google.firebase.auth.FirebaseAuth;
 import com.google.firebase.auth.FirebaseUser;
@@ -98,7 +91,7 @@ public class Profile extends AppCompatActivity {
                 FirebaseAuth.getInstance().signOut();
                 Toast.makeText(Profile.this, "LogOut Succsessful.",
                         Toast.LENGTH_SHORT).show();
-                Intent intent = new Intent(Profile.this, Login.class);
+                Intent intent = new Intent(Profile.this, LoginActivity.class);
                 startActivity(intent);
             }
         });

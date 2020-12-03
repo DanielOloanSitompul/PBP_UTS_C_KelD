@@ -24,7 +24,7 @@
         <activity android:name=".Activity.ProfileUpdate"/>
         <activity android:name=".login.ForgotPassword" />
         <activity android:name=".login.Register" />
-        <activity android:name=".login.Login" />
+        <activity android:name=".login.LoginActivity" />
         <activity android:name=".splash.SplashScreen">
             <intent-filter>
                 <action android:name="android.intent.action.MAIN" />
